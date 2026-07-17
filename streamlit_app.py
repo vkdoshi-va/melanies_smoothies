@@ -2,7 +2,7 @@
 import streamlit as st
 import os
 import requests
-import panda as pd
+import pandas as pd
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
@@ -12,7 +12,12 @@ st.write("Choose the fruits you want in your custom smoothie!"
 cnx = st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col("Fruit_name"),col("Search_on"))
-st.dataframe(data=my_dataframe, use_container_width=True)
+#st.dataframe(data=my_dataframe, use_container_width=True)
+#st.stop()
+
+#convert the snowpark dataframe to a panda dataframe so we can use LOC function
+pd_df=my_dataframe.to_pandas()
+st.dataframe (pd_df)
 st.stop()
 
 name_on_order = st.text_input("Name on Smoothie:")
