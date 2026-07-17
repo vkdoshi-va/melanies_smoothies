@@ -2,7 +2,7 @@
 snowflake-snowpark-python
 streamlit
 requests
-panda
+pandas
 
 #name: sf_env
 #channels:
